@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script   src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h3>登录</h3>
+        <br />
+        <form id="target" role="form">
+
+           <div class = "form-group">
+              <label for = "name">姓名</label>
+              <input type = "text" class = "form-control" id = "name" placeholder = "请输入姓名">
+           </div>
+
+           <div class = "form-group">
+              <label for = "name">密码</label>
+              <input type = "password" class = "form-control" id = "password" placeholder = "请输入密码">
+           </div>
+        </form>
+            <button class = "btn btn-default" onclick="submit()">提交</button>
+
+        <script type="text/javascript">
+            function submit() {
+                var value = $("#name").val();
+                var password = $("#password").val();
+
+
+
+                $.ajax({
+                   type: 'POST',
+                   url:'/api/v1/auth/login',
+                   data: { value: value, password: password },
+                   success: function(data, textStatus, request){
+                        window.location = '/';
+                   },
+                   error: function (request, textStatus, errorThrown) {
+                        alert('fail');
+                   }
+                });
+            }
+        </script>
+    </body>
+</html>
